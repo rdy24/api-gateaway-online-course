@@ -14,6 +14,9 @@ const refreshTokensRouter = require("./routes/refreshTokens");
 const mentorsRouter = require("./routes/mentors");
 const chaptersRouter = require("./routes/chapters");
 const lessonsRouter = require("./routes/lessons");
+const imageCoursesRouter = require("./routes/image-courses");
+const myCoursesRouter = require("./routes/my-courses");
+const reviewsRouter = require("./routes/reviews");
 
 const verifyToken = require("./middlewares/verifyToken");
 
@@ -27,13 +30,16 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/media", verifyToken, mediaRouter);
-app.use("/orders", ordersRouter);
 app.use("/courses", coursesRouter);
-app.use("/payments", paymentsRouter);
+app.use("/chapters", verifyToken, chaptersRouter);
+app.use("/lessons", verifyToken, lessonsRouter);
+app.use("/media", verifyToken, mediaRouter);
+app.use("/orders", verifyToken, ordersRouter);
 app.use("/refresh_tokens", refreshTokensRouter);
-app.use("/mentors", mentorsRouter);
-app.use("/chapters", chaptersRouter);
-app.use("/lessons", lessonsRouter);
+app.use("/mentors", verifyToken, mentorsRouter);
+app.use("/image-courses", verifyToken, imageCoursesRouter);
+app.use("/my-courses", verifyToken, myCoursesRouter);
+app.use("/payments", paymentsRouter);
+app.use("/reviews", reviewsRouter);
 
 module.exports = app;
