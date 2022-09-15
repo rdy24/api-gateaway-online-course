@@ -6,7 +6,6 @@ const api = apiAdapter(URL_SERVICE_COURSE);
 module.exports = async (req, res) => {
 	try {
 		const userId = req.user.data.id;
-		console.log(userId);
 
 		const review = await api.post("/api/reviews", {
 			user_id: userId,
@@ -20,7 +19,7 @@ module.exports = async (req, res) => {
 				.json({ status: "error", message: "service unavailable" });
 		}
 
-		// const { data } = error.response;
-		return res.json(error.response);
+		const { status, data } = error.response;
+		return res.status(status).json(data);
 	}
 };

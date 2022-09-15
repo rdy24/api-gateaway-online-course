@@ -40,6 +40,6 @@ app.use("/mentors", verifyToken, mentorsRouter);
 app.use("/image-courses", verifyToken, imageCoursesRouter);
 app.use("/my-courses", verifyToken, myCoursesRouter);
 app.use("/payments", paymentsRouter);
-app.use("/reviews", reviewsRouter);
+app.use("/reviews", verifyToken, reviewsRouter);
 
 module.exports = app;
